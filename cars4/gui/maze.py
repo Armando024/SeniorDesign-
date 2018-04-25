@@ -7,7 +7,7 @@ from gui.car import Car
 from gui.BaseMaze import BaseMaze
 from gui.logger import Logger
 class Maze: 
-    def __init__(self,w=20,h=20,complexity=.75,density=.75):
+    def __init__(self,w=20,h=20,complexity=.75,density=.75, outputfile="out.csv"):
         sc.init()
         self.font=sc.font.SysFont(None ,24 )
         self.text=self.font.render("Right key:changes maze",True,(0,128,0))
@@ -18,7 +18,7 @@ class Maze:
         self.w=w
         self.h=h
         self.maze=BaseMaze(self.w,self.h,complexity,density)
-        self.logger = Logger(open("out.csv", "w"), self);
+        self.logger = Logger(open("output/"+outputfile, "w"), self);
          
     def get_event(self,event):
         if event.type == sc.KEYDOWN:

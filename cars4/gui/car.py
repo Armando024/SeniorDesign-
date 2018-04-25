@@ -12,7 +12,7 @@ class Car:
          #the multi used for gui
     def __str__(self):
         #for debuffing puposes
-        temp="x=="+self.x+" y=="+self.y
+        temp="x=="+str(self.x)+" y=="+str(self.y) + " x_off==" +str(self.temp_sides) + " y_off=="+str(self.up_down) 
         return temp
     def get_x1(self):
         return self.x*(30)+(self.up_down*5)
