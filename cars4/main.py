@@ -51,7 +51,7 @@ if __name__=='__main__':
         #add more states ...  50 30
     }
     sc.key.set_repeat(1, 28)   
-    app=Controls(750,525,60) #(width of screen,height, frames per second)
+    app=Controls(800,525,60) #(width of screen,height, frames per second)
     app.setup(states,'Maze')
     app.main_loop()
     sc.quit()
