@@ -1,0 +1,12 @@
+Data Collection:
+  - We have code to collect data as the object move sin pygame.
+  - Each of us will train the car and combine our collected data.
+  - Use collected the data to train the car to move around the maze.
+  - Continue to implement both neural networking and reinforcement learning.
+  
+Website:
+  - Website will have an description of our project.
+  - Plan on having videos and picture of our demo.
+  
+Goals:
+  -Each memeber of our group will collect data by moving the car from start to finish in several different mazes.

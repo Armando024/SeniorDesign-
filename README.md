@@ -5,7 +5,5 @@ Tasks:
   2. Initialize the decomposition of images from the gui.
   3. Initialize website.
   4. Improve the GUI.
-    -Make road wider.
-    -Make turns possible.
-    
+    -Made road wider. 
   

@@ -8,8 +8,36 @@ class BaseMaze:
         self.com=com
         self.den=den
         self.ConstructMaze()
-        print(self)
+        #print(self)
+        self.inc_width(3) 
         
+    def inc_width(self,width=10):
+        #creating copy
+        inc_Maze=self.maze
+        out_maze=[]
+        for a in range(0,width):
+            newMaze=[]
+                #basically adds a new row
+            for i in inc_Maze:
+                newMaze.append(i)
+                newMaze.append(i)            
+                   
+           # for xr in newMaze:
+            #    print(xr)
+        
+            newMaze2=[]
+#            print("")
+                #doubling the width
+            for a in newMaze:
+                temp=[]
+                for b in a:
+                    temp.append(b)
+                    temp.append(b)
+                newMaze2.append(temp)  
+           # for xz in newMaze2:
+            #    print(xz)
+            inc_Maze=newMaze2
+        self.maze=inc_Maze
         
     def ConstructMaze(self):
         shape = ((self.h// 2) * 2 + 1, (self.w// 2) * 2 + 1)
@@ -30,8 +58,6 @@ class BaseMaze:
                     self.maze[j][i]=1
                 if(j==0 or j==(self.h-1) ):
                     self.maze[j][i]=1
-               # print(self.maze[j][i],end=" ")
-           # print('\n')
 
         for i in range(density):
             x,y=rand(0, shape[1] // 2) * 2, rand(0, shape[0] // 2) * 2
@@ -48,7 +74,6 @@ class BaseMaze:
                     next_to.append((y+2,x))
                 if len(next_to):
                    y1,x1=next_to[rand(0,len(next_to)-1)]
-                   print("y== "+(str)(y1)+" x=="+(str)(x1))
                    if self.maze[y1][x1]==0:
                         self.maze[y1][x1]=1
                         self.maze[y1+(y-y1)//2][x1+(x-x1)//2]=1
@@ -56,14 +81,20 @@ class BaseMaze:
 
     def re_Construct(self):
         self.ConstructMaze()
+        self.inc_width(3) 
+    
     def inc_com(self):
-        if (self.com<.98):
+        if (self.com<1):
             self.com+=.02
-            self.ConstructMaze()    
+            self.ConstructMaze()   
+            self.inc_width(3) 
+     
     def inc_den(self):
-        if (self.den<.98):
+        if (self.den<1):
             self.den+=.02
             self.ConstructMaze()
+            self.inc_width(3) 
+
     def __str__(self): #for debugging
         temp=""
         for b in self.maze:
@@ -71,18 +102,24 @@ class BaseMaze:
         return temp        
     
     def g_h(self): #get h
-        return (int)(self.h)
-    
+        return len(self.maze)    
     def g_w(self): #get w
-        return (int)(self.w)
-    
+        return len(self.maze[0])
     def g_den(self):#get density
         return self.den
-    
     def g_com(self):#get complexity
         return self.com
     def get_Maze(self):
         return self.maze
     def get_Value(self,y,x):
         return self.maze[y][x]
+    def g_dh(self):
+        return len(self.doubleMaze)
+    def g_dw(self):
+        return len(self.doubleMaze[0])
+    def get_doubleMaze(self):
+        return self.doubleMaze
+    
+
+
 

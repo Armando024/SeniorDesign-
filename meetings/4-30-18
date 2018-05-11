@@ -1,0 +1,10 @@
+Progress:
+- A output file was added: location & keypress
+- There was a bug: Fixed
+    The top right corner of the car was not identfying the wall so when the top right is being moved along the path the bottom part can be going through the walls
+- Adding end points (possible ideas)
+  1. randomized:
+    - same distance
+    - different distance (has a minimum for how close the end point can be)
+  2. same coordinate
+    - problem: if the wall is on that same coordinate 
