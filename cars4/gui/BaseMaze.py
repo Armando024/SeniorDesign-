@@ -2,11 +2,15 @@ from numpy.random import random_integers as rand
 
 
 class BaseMaze:
-    def __init__(self,w=30,h=50,com=.75,den=.75):
+    def __init__(self,w=30,h=50,com=.75,den=.75,startx=0,starty=0,endx=0,endy=0):
         self.w=w
         self.h=h
         self.com=com
         self.den=den
+        self.startx=startx
+        self.starty=starty
+        self.endx=endx
+        self.endy=endy
         self.ConstructMaze()
         #print(self)
         self.inc_width(3) 
@@ -78,6 +82,9 @@ class BaseMaze:
                         self.maze[y1][x1]=1
                         self.maze[y1+(y-y1)//2][x1+(x-x1)//2]=1
                         x,y=x1,y1
+        
+        self.maze[self.starty][self.startx] = 2
+        self.maze[self.endy][self.endx] = 3
 
     def re_Construct(self):
         self.ConstructMaze()
