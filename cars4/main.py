@@ -45,9 +45,11 @@ class Controls:
             sc.display.update()
 
 if __name__=='__main__':
+
+    outputfile = input("Output File:")
     con,dens = .2,.2
     states={
-        'Maze':Maze(25,15,con,dens) 
+        'Maze':Maze(25,15,con,dens,outputfile) 
         #add more states ...  50 30
     }
     sc.key.set_repeat(1, 28)   

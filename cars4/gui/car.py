@@ -15,8 +15,8 @@ class Car:
         self.temp_sides=0
         self.up_down=0
     def __str__(self):
-        #for debugging puposes
-        temp="x=="+self.x+" y=="+self.y
+        #for debuffing puposes
+        temp="x=="+str(self.x)+" y=="+str(self.y) + " x_off==" +str(self.temp_sides) + " y_off=="+str(self.up_down) 
         return temp
   #  def canMove(self,value,direction):
    #     if(direction is 0): #left direction=0  
