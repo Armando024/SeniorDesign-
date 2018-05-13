@@ -1,5 +1,6 @@
-inputcsv = 'output/mikhail.csv'
-VISION_RADIUS = 5;
+inputcsv = 'output/big.csv'
+model_dir = './model4'
+VISION_RADIUS = 24;
 
 import math
 
@@ -49,7 +50,7 @@ for x in range(0,VISION_RADIUS):
 	for y in range(0,VISION_RADIUS):
 		features.append(tf.feature_column.numeric_column(key=str(x)+"_"+str(y)))
 
-tfModel = tf.estimator.DNNClassifier(feature_columns=features,hidden_units=[20],model_dir="./model1",n_classes=4)
+tfModel = tf.estimator.DNNClassifier(feature_columns=features,hidden_units=[20],model_dir=model_dir,n_classes=4)
 
 
 tf.Variable(inputs[0]['maze'])
@@ -62,11 +63,12 @@ def input_fn(inputs):
 	labels = []
 	i=1
 	for row in inputs:
-		print(i)
-		i =i+1;
 		kp = row['keypress']
 		if not kp in keys:
 			continue
+		
+		print(i, row['maze'],keys[kp])
+		i =i+1;
 		for x in range(0,VISION_RADIUS):
 			for y in range(0,VISION_RADIUS):
 				if not str(x)+"_"+str(y) in features:
