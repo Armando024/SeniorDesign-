@@ -5,17 +5,21 @@ html {
 	font-variant: normal;
 	font-weight: 500;
 	line-height: 26.4px;
+    #padding: 30px;
+    margin: 30;
 }
 
     
 
 body {
+    text-align: center; 
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 	font-size: 14px;
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 400;
 	line-height: 20px;
+    padding: 70px;
 }
 
 
