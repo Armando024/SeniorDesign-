@@ -16,9 +16,9 @@ class Maze:
     def __init__(self,w=20,h=20,complexity=.75,density=.75, outputfile="out.csv"):
         sc.init()
         self.font=sc.font.SysFont(None ,24 )
-        self.text=self.font.render("Right key:changes maze",True,(0,128,0))
+        self.text=self.font.render("Right Key: Changes Maze",True,(0,128,0))
         self.text1=self.font.render("Down Key: Increases Density",True,(0,128,0))
-        self.text2=self.font.render("Up Key:Increases complexity",True,(0,128,0))
+        self.text2=self.font.render("Up Key: Increases Complexity",True,(0,128,0))
         self.car=Car(4,4,9,9) 
         States.__init__(self)
         self.w=w
