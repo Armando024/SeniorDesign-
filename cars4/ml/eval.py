@@ -11,7 +11,7 @@ for x in range(0,VISION_RADIUS):
 
 tfModel = tf.estimator.DNNClassifier(feature_columns=features,hidden_units=[20],model_dir=model_dir,n_classes=4)
 
-mazesub = [[1,1,1],[0,0,1],[1,1,1]]
+mazesub = [[1,0,1],[0,0,1],[1,0,1]]
 mazescale = 8
 maze = []
 for y in range(0,len(mazesub)):

@@ -1,5 +1,5 @@
-inputcsv = 'output/big.csv'
-model_dir = './model4'
+inputcsv = 'output/output.csv'
+model_dir = './model5'
 VISION_RADIUS = 24;
 
 import math

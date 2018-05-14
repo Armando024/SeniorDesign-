@@ -5,17 +5,14 @@ from numpy.random import random_integers as rand
 from gui.states import States
 from gui.car import Car
 from gui.BaseMaze import BaseMaze
-<<<<<<< HEAD
 from gui.logger import Logger
-class Maze: 
-    def __init__(self,w=20,h=20,complexity=.75,density=.75, outputfile="out.csv"):
-=======
+import ml.predict as predict
+
 
 DRIVABLE = {0, 2, 3}
 
 class Maze:
-    def __init__(self,w=20,h=20,complexity=.75,density=.75):
->>>>>>> cb5bbd5f1ec5aea571ccd4fb94088372de42b7df
+    def __init__(self,w=20,h=20,complexity=.75,density=.75, outputfile="out.csv"):
         sc.init()
         self.font=sc.font.SysFont(None ,24 )
         self.text=self.font.render("Right key:changes maze",True,(0,128,0))
@@ -25,15 +22,12 @@ class Maze:
         States.__init__(self)
         self.w=w
         self.h=h
-<<<<<<< HEAD
-        self.maze=BaseMaze(self.w,self.h,complexity,density)
 
-        self.logger = Logger(open("output/"+outputfile, "w"), self);
          
-=======
         self.maze=BaseMaze(self.w,self.h,complexity,density,1,1,self.w-2,self.h-2)
-          
->>>>>>> cb5bbd5f1ec5aea571ccd4fb94088372de42b7df
+        self.logger = Logger(open("output/"+outputfile, "w"), self);
+        self.predictor = predict.Predictor()
+
     def get_event(self,event):
         if event.type == sc.KEYDOWN:
 
@@ -62,8 +56,31 @@ class Maze:
             if self.maze.get_Value(int(self.car.get_x()),int(self.car.get_y())) == 3:
                 print("Congratulations!")
 
+
+
     def update(self,screen,dt): 
         self.draw(screen)
+
+        subMaze = predict.subArray(self.maze.maze,self.car.get_x(), self.car.get_y(),24,24)
+        # comment below this to not have the bot running
+        self.bot_input(self.predictor.act(subMaze))
+
+
+    def bot_input(self,event):
+       
+        if event == 1 and self.maze.get_Value(int(self.car.get_x()),int(self.car.get_y())-2) in DRIVABLE and self.maze.get_Value(int(self.car.get_x()+1),int(self.car.get_y())-2) in DRIVABLE: #left
+            self.car.m_u()
+        if event== 3 and self.maze.get_Value(int(self.car.get_x()),int(self.car.get_y())+1) in DRIVABLE and self.maze.get_Value(int(self.car.get_x()+1),int(self.car.get_y())+1) in DRIVABLE: #right
+            self.car.m_d()
+        if event== 0 and self.maze.get_Value(int(self.car.get_x())-1,int(self.car.get_y())) in DRIVABLE and self.maze.get_Value(int(self.car.get_x())-1,int(self.car.get_y()-1)) in DRIVABLE: #UP
+            self.car.m_l()
+        if event == 2 and self.maze.get_Value(int(self.car.get_x())+1+1,int(self.car.get_y()-1)) in DRIVABLE and self.maze.get_Value(int(self.car.get_x())+1+1,int(self.car.get_y())) in DRIVABLE: #down
+            self.car.m_r()
+        # Check whether car has hit the finish
+        if self.maze.get_Value(int(self.car.get_x()),int(self.car.get_y())) == 3:
+            print("Congratulations!")
+
+
 
     def draw(self,screen): #actual drawing goes here
         screen.fill((255,255,255)) 
