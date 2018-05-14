@@ -14,7 +14,7 @@ How to run main.py using linux or Mac_os
 1. Randon Maze generator:
 	walls 
 2. Car:
-	smart enought from point one to point 2
+	smart enought to move from begin point to end point.
 3. Obstacles:
 	dynamic in the road.
 	Static. 
