@@ -42,19 +42,20 @@ def transpose(array):
 
 class Predictor:
 	
-	features = []
-	# features.append(tf.feature_column.numeric_column("maze"));
-	for x in range(0,VISION_RADIUS):
-		for y in range(0,VISION_RADIUS):
-			features.append(tf.feature_column.numeric_column(key=str(x)+"_"+str(y)))
-
-	tfModel = tf.estimator.DNNClassifier(feature_columns=features,hidden_units=[20],model_dir=model_dir,n_classes=4)
-
+	
+	
 
 	def __init__(self):
 		self.stepsCount = 0
 		self.lastInput = 0
+		features = []
+		# features.append(tf.feature_column.numeric_column("maze"));
+		for x in range(0,VISION_RADIUS):
+			for y in range(0,VISION_RADIUS):
+				features.append(tf.feature_column.numeric_column(key=str(x)+"_"+str(y)))
 
+		
+		self.tfModel = tf.estimator.DNNClassifier(feature_columns=features,hidden_units=[20],model_dir=model_dir,n_classes=4)
 
 
 	def input_fn(self, maze):

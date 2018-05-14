@@ -8,6 +8,7 @@ from gui.BaseMaze import BaseMaze
 from gui.logger import Logger
 import ml.predict as predict
 
+import ml.reinforcement as reinforce
 
 DRIVABLE = {0, 2, 3}
 
@@ -57,13 +58,20 @@ class Maze:
                 print("Congratulations!")
 
 
-
     def update(self,screen,dt): 
         self.draw(screen)
 
         subMaze = predict.subArray(self.maze.maze,self.car.get_x(), self.car.get_y(),24,24)
         # comment below this to not have the bot running
-        self.bot_input(self.predictor.act(subMaze))
+        # self.bot_input(self.predictor.act(subMaze))
+
+        #reinforcement learning (simplifies maze) 
+        self.maze.maze = reinforce.copy_into(
+                self.maze.maze,
+                reinforce.fill_dead_ends(predict.subArray(self.maze.maze,self.car.get_x(), self.car.get_y(),24,24)),
+                self.car.get_x()-12,
+                self.car.get_y()-12
+        )
 
 
     def bot_input(self,event):
