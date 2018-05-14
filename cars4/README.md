@@ -14,16 +14,14 @@ How to run main.py using linux or Mac_os
 1. Randon Maze generator:
 	walls 
 2. Car:
-	Sensor:Sensor send data to brain
-	Will restart
-	4-directions
+	smart enought from point one to point 2
 3. Obstacles:
 	dynamic in the road.
 	Static. 
 	shapes: rectangle, triangle. 
-4. Brain:
-	will communicate with the car, 
-	to tell it's movements.
+4. Website:
+	Display our work 
+	Details about us
 
 Algorithm: 
 	Neural Network.
