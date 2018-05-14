@@ -81,11 +81,14 @@ class Predictor:
 		if self.stepsCount == 0:
 			probs = self.predict(maze)
 
-			if maze[11][12] == 1:		
+			for y in range(10,16):
+				print(maze[y][10:16])
+
+			if maze[10][12] == 1:		
 				probs[0] = 0
-			if maze[12][11] == 1:		
+			if maze[12][10] == 1:		
 				probs[1] = 0
-			if maze[13][12] == 1:		
+			if maze[14][12] == 1:		
 				probs[2] = 0
 			if maze[12][13] == 1:
 				probs[3] = 0
