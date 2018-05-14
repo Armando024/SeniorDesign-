@@ -33,6 +33,8 @@ import ast
 inputReader = csv.DictReader(open(inputcsv))
 inputs = [];
 
+
+
 for row in inputReader:
 	inputs.append({})
 	inputs[-1]['x'] = row['X']
@@ -41,7 +43,7 @@ for row in inputReader:
 	inputs[-1]['keypress'] = row['KeyPress']
 	#print(str(inputs[-1]['maze']))
 
-
+gMaze = inputs[0]['maze']
 
 import tensorflow as tf
 features = []
@@ -67,14 +69,14 @@ def input_fn(inputs):
 		if not kp in keys:
 			continue
 		
-		print(i, row['maze'],keys[kp])
+		print(i, gMaze,keys[kp])
 		i =i+1;
 		for x in range(0,VISION_RADIUS):
 			for y in range(0,VISION_RADIUS):
 				if not str(x)+"_"+str(y) in features:
 					features[str(x)+"_"+str(y)] = []
-				features[str(x)+"_"+str(y)].append(row['maze'][x][y])
-		# features['maze'].append(row['maze'])
+				features[str(x)+"_"+str(y)].append(gMaze[x][y])
+		# features['maze'].append(gMaze)
 		#kp == w, a, s , d
 
 		labels.append(keys[str(kp)])
