@@ -41,6 +41,17 @@ button {
     border-color: #8d7b92
 }
 
+table, th, td {
+    margin: 30;
+    padding: 30px;
+    border: 5px solid;
+    background-color: #ffef96;
+    font-size: 14px;
+	font-style: bold;
+    color: white;
+    text-align: center; 
+    
+}
 
 
 
