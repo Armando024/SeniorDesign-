@@ -22,5 +22,5 @@ class Logger:
 	def log(self, move):
 		self.stepCount += 1
 		print(self.stepCount, move, self.maze.car)
-		self.csvWriter.writerow([str(self.maze.maze.maze) if stepCount == 1 else '', str(move), str(self.maze.car.x), str(self.maze.car.y), str(self.maze.car.temp_sides), str(self.maze.car.up_down)])
+		self.csvWriter.writerow([str(self.maze.maze.maze) if self.stepCount == 1 else '', str(move), str(self.maze.car.x), str(self.maze.car.y), str(self.maze.car.temp_sides), str(self.maze.car.up_down)])
 

@@ -1,5 +1,5 @@
-inputcsv = 'output/output.csv'
-model_dir = './model5'
+inputcsv = 'output/abc.csv'
+model_dir = './abc'
 VISION_RADIUS = 24;
 
 import math
@@ -39,7 +39,7 @@ for row in inputReader:
 	inputs.append({})
 	inputs[-1]['x'] = row['X']
 	inputs[-1]['y'] = row['Y']
-	inputs[-1]['maze'] = subArray(ast.literal_eval(row['Maze'][1:-1]), int(row['X']), int(row['Y']), VISION_RADIUS, VISION_RADIUS)#trims quotes
+	inputs[-1]['maze'] = subArray(ast.literal_eval(row['Maze'][1:-1]) if row['Maze'] != '' else [], int(row['X']), int(row['Y']), VISION_RADIUS, VISION_RADIUS)#trims quotes
 	inputs[-1]['keypress'] = row['KeyPress']
 	#print(str(inputs[-1]['maze']))
 
