@@ -10,7 +10,7 @@ def subArray(array, cx, cy, width, height):
 		newArr.append([])
 		for x in range(cx-math.floor(width/2),cx+math.ceil(width/2)):
 			if y < 0 or y >= len(array) or x < 0 or x >= len(array[y]):
-				newArr[-1].append(-1)
+				newArr[-1].append(1)
 			else:
 				newArr[-1].append(array[y][x])
 	return newArr
