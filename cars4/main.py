@@ -1,5 +1,7 @@
 import pygame as sc
 import sys
+from gui.filename import NameInput
+from gui.intro import Intro
 from gui.maze import Maze
 from gui.states import States
 class Controls:
@@ -19,9 +21,10 @@ class Controls:
     def state_change(self):
         self.current_state.done=False
         previous,self.start_state=self.start_state,self.current_state.next
-        self.current_state.cleanup()
+        temp=self.current_state.get_data() #get data before clean
+        self.current_state.cleanup() #cleans variables
         self.current_state=self.states[self.start_state]
-        self.current_state.startup()
+        self.current_state.startup(temp) #adding startup events
         self.current_state.previous=previous
         
     def update(self,temp):
@@ -32,10 +35,13 @@ class Controls:
             self.state_change()
         self.current_state.update(self.window,temp)
     def event_loop(self):
-        for event in sc.event.get():
-            if event.type== sc.QUIT:
-                self.done=True
-            self.current_state.get_event(event)
+        if self.current_state is self.states['FileName']:
+            self.current_state.get_event(sc.event.get())
+        else:
+            for event in sc.event.get():
+                if event.type== sc.QUIT:
+                    self.done=True
+                self.current_state.get_event(event)
 
     def main_loop(self):
         while not self.done:
@@ -46,15 +52,18 @@ class Controls:
 
 if __name__=='__main__':
 
-    outputfile = input("Output File:")
+#    outputfile = input("Output File:")
     con,dens = .2,.2
     states={
-        'Maze':Maze(25,15,con,dens,outputfile) 
+        'FileName':NameInput(),
+        'Intro':Intro(),
+        'Maze':Maze(25,15,con,dens,"default.csv") 
         #add more states ...  50 30
     }
     sc.key.set_repeat(1, 28)   
     app=Controls(800,525,60) #(width of screen,height, frames per second)
-    app.setup(states,'Maze')
+    app.setup(states,'Intro')
+    # app.setup(states,'Maze')
     app.main_loop()
     sc.quit()
     sys.exit() 

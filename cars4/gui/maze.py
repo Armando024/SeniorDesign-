@@ -13,7 +13,7 @@ import ml.reinforcement as reinforce
 DRIVABLE = {0, 2, 3}
 
 class Maze:
-    def __init__(self,w=20,h=20,complexity=.75,density=.75, outputfile="out.csv"):
+    def __init__(self,w=20,h=20,complexity=.75,density=.75, outputfile="out.csv",mode=0):
         sc.init()
         self.font=sc.font.SysFont(None ,24 )
         self.text=self.font.render("Right Key: Changes Maze",True,(0,128,0))
@@ -23,12 +23,33 @@ class Maze:
         States.__init__(self)
         self.w=w
         self.h=h
-
-         
+        self.mode=0 #three modes 0=just play grounf 1=bot mode 2=train mode
+        self.outputfile=outputfile 
         self.maze=BaseMaze(self.w,self.h,complexity,density,1,1,self.w-2,self.h-2)
-        self.logger = Logger(open("output/"+outputfile, "w"), self);
         self.predictor = predict.Predictor()
-
+                
+    def exe_logger(self):
+        self.logger = Logger(open("output/"+self.outputfile, "w"), self);
+            
+        
+    def startup(self,nums): #setting up the start up
+        
+        print(nums)
+        if( nums[0]=='0'):
+            self.mode=0
+            print("playing mode")
+        elif (nums[0]=='1'):
+            self.mode=1
+            print("bot mode")
+        else:
+            self.mode=2
+            if nums[1]==' ' or nums[1]=='':
+                self.outputfile="out.csv"
+            else:
+                self.outputfile=nums[1]
+        self.exe_logger()
+        sc.key.set_repeat(1,28)
+        return
     def get_event(self,event):
         if event.type == sc.KEYDOWN:
 
@@ -63,7 +84,8 @@ class Maze:
 
         subMaze = predict.subArray(self.maze.maze,self.car.get_x(), self.car.get_y(),24,24)
         # comment below this to not have the bot running
-        # self.bot_input(self.predictor.act(subMaze))
+        if self.mode is 1:
+            self.bot_input(self.predictor.act(subMaze))
 
         #reinforcement learning (simplifies maze) 
         self.maze.maze = reinforce.copy_into(
@@ -123,8 +145,4 @@ class Maze:
     def cleanup(self):
         #createclean up
         pass
-
-
-
-
 
